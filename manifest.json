@@ -1,7 +1,7 @@
 {
   "name": "Right Click Freedium",
   "short_name": "Right Click Freedium",
-  "description": "Adds a right-click menu option to redirect Medium articles to an alternative view for easier reading.",
+  "description": "Redirect Medium articles to a clean, reader-friendly view in one right-click. Bypass paywalls and login blocks instantly.",
   "version": "1.0.1",
   "author": "vatsalya.singhi@gmail.com",
   "manifest_version": 3,
