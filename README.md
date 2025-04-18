@@ -38,7 +38,7 @@ This extension is perfect for users who want fast, distraction-free access to co
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/vatsalya-singhi/right-click-freedium.git
+   git clone https://github.com/Vatsalya-singhi/right-click-freedium.git
    ```
 2. Open your Chrome browser and go to: `chrome://extensions/`
 3. Enable **Developer Mode** (top right corner)
