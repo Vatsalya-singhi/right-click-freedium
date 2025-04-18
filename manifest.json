@@ -1,0 +1,30 @@
+{
+  "name": "Right Click Freedium",
+  "short_name": "Right Click Freedium",
+  "description": "Adds a right-click menu option to redirect Medium articles to an alternative view for easier reading.",
+  "version": "1.0.1",
+  "author": "vatsalya.singhi@gmail.com",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Right Click Freedium",
+    "default_popup": "./src/index.html",
+    "default_locale": "en",
+    "default_icon": {
+      "16": "./icons/icon16.png",
+      "32": "./icons/icon32.png",
+      "48": "./icons/icon48.png",
+      "128": "./icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "./icons/icon16.png",
+    "32": "./icons/icon32.png",
+    "48": "./icons/icon48.png",
+    "128": "./icons/icon128.png"
+  },
+  "permissions": ["tabs", "contextMenus", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["<all_urls>"]
+}
