@@ -1,8 +1,8 @@
 {
   "name": "Right Click Freedium",
   "short_name": "Right Click Freedium",
-  "description": "Redirect Medium articles to a clean, reader-friendly view in one right-click. Bypass paywalls and login blocks instantly.",
-  "version": "1.0.1",
+  "description": "A right-click tool to view Medium articles in a clean, reader-friendly layout.",
+  "version": "1.0.2",
   "author": "vatsalya.singhi@gmail.com",
   "manifest_version": 3,
   "action": {
@@ -22,9 +22,17 @@
     "48": "./icons/icon48.png",
     "128": "./icons/icon128.png"
   },
-  "permissions": ["tabs", "contextMenus", "scripting"],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "declarativeContent"
+  ],
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["<all_urls>"]
+  "host_permissions": [
+    "*://medium.com/*",
+    "*://*.medium.com/*"
+  ],
+  "homepage_url": "https://vatsalyasinghi.github.io/right-click-freedium/"
 }
