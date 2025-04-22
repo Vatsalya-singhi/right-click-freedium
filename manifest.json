@@ -33,6 +33,5 @@
   "host_permissions": [
     "*://medium.com/*",
     "*://*.medium.com/*"
-  ],
-  "homepage_url": "https://vatsalyasinghi.github.io/right-click-freedium/"
+  ]
 }
