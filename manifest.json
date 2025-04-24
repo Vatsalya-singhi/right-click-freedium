@@ -33,5 +33,6 @@
   "host_permissions": [
     "*://medium.com/*",
     "*://*.medium.com/*"
-  ]
+  ],
+  "privacy_policy": "https://vatsalya-singhi.github.io/right-click-freedium/privacy.html"
 }
