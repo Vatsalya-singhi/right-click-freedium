@@ -19,9 +19,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // Create the context menu dynamically based on the tab content
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "open-in-freedium") {
+  if (info.menuItemId.indexOf("open-in-freedium") !== -1) {
     // Redirect the user to a simplified version of the Medium page
-    chrome.tabs.create({ url: `https://freedium.site/${tab.url}` });
+    chrome.tabs.update({ url: `https://freedium.cfd/${tab.url}` });
   }
 });
 
