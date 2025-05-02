@@ -2,7 +2,7 @@
   "name": "Right Click Freedium",
   "short_name": "Right Click Freedium",
   "description": "A right-click tool to view Medium articles in a clean, reader-friendly layout.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "vatsalya.singhi@gmail.com",
   "manifest_version": 3,
   "action": {
@@ -23,16 +23,15 @@
     "128": "icons/icon128.png"
   },
   "permissions": [
+    "scripting",
     "contextMenus",
     "tabs",
-    "declarativeContent"
+    "activeTab"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "host_permissions": [
-    "*://medium.com/*",
-    "*://*.medium.com/*",
-    "*://*/*"
+    "<all_urls>"
   ]
 }

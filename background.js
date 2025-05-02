@@ -1,20 +1,36 @@
-// Remove previous rules and add new ones when the extension is installed
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
-    chrome.declarativeContent.onPageChanged.addRules([
+// Listen for the page state change to dynamically create a context menu
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status === "complete" && tab.url) {
+    // Skip restricted URLs like chrome:// or about://
+    if (tab.url.startsWith("chrome://") || tab.url.startsWith("about://")) {
+      return;
+    }
+
+    // Inject a script to check for Medium-specific markers
+    chrome.scripting.executeScript(
       {
-        conditions: [
-          // Match if the URL contains "medium" in the domain
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: {
-              hostContains: "medium" // Match both custom and standard Medium domains
-            }
-          })
-        ],
-        actions: [new chrome.declarativeContent.ShowAction()] // Show extension icon when on Medium pages
+        target: { tabId: tabId },
+        func: () => {
+          // Check for Medium-specific meta tag
+          const metaTag = document.querySelector('meta[property="og:site_name"]');
+          return metaTag && metaTag.content === "Medium";
+        },
+      },
+      (results) => {
+        if (results && results[0]?.result) {
+          const menuId = `open-in-freedium-${tabId}`;
+
+          // Create a context menu item dynamically for Medium pages
+          chrome.contextMenus.create({
+            id: menuId,
+            title: "Open in Freedium",
+            contexts: ["page"],
+            documentUrlPatterns: [tab.url], // Only for this tab's URL
+          });
+        }
       }
-    ]);
-  });
+    );
+  }
 });
 
 // Create the context menu dynamically based on the tab content
@@ -22,25 +38,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId.indexOf("open-in-freedium") !== -1) {
     // Redirect the user to a simplified version of the Medium page
     chrome.tabs.update({ url: `https://freedium.cfd/${tab.url}` });
-  }
-});
-
-// Listen for the page state change to dynamically create a context menu
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === "complete" && tab.url) {
-    // Only create a menu for Medium pages (including custom domains like danny.fyi)
-    const urlPattern = /medium\.com/;
-    if (urlPattern.test(tab.url)) {
-      const menuId = `open-in-freedium-${tabId}`;
-
-      // Create a context menu item dynamically for Medium pages
-      chrome.contextMenus.create({
-        id: menuId,
-        title: "Open in Freedium",
-        contexts: ["page"],
-        documentUrlPatterns: [tab.url], // Only for this tab's URL
-      });
-    }
   }
 });
 
