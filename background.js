@@ -2,7 +2,21 @@
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete" && tab.url) {
     // Skip restricted URLs like chrome:// or about://
-    if (tab.url.startsWith("chrome://") || tab.url.startsWith("about://")) {
+    if (
+      tab.url.startsWith("chrome://") ||
+      tab.url.startsWith("about://") ||
+      tab.url.startsWith("https://chrome.google.com/webstore") ||
+      tab.url.startsWith("file://") ||
+      tab.url.startsWith("view-source:") ||
+      tab.url.startsWith("data:") ||
+      tab.url.startsWith("filesystem:") ||
+      tab.url.startsWith("edge://") || // For Microsoft Edge
+      tab.url.startsWith("devtools://") ||
+      tab.url.startsWith("chrome-error://") ||
+      tab.url.startsWith("blob:") ||
+      tab.url.startsWith("intent:") ||
+      tab.url.startsWith("chrome-extension://")
+    ) {
       return;
     }
 
