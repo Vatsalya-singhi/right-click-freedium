@@ -51,7 +51,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId.indexOf("open-in-freedium") !== -1) {
     // Redirect the user to a simplified version of the Medium page
-    chrome.tabs.update({ url: `https://freedium.cfd/${tab.url}` });
+    chrome.tabs.update({ url: `https://freedium-mirror.cfd/${tab.url}` });
   }
 });
 
